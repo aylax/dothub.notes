@@ -2,8 +2,6 @@
 #+author: aylax
 #+date: 2021-08-25
 
-
-* AyLax's notes
 The notes used to record some of my thoughts and life.
 
 ** Install
@@ -14,9 +12,9 @@ git clone https://github.com/aylax/dothub.notes ~/aylax.notes
 ** Usage
 The notes is available as org file which you can load in Emacs.
 
-** Refs & Thanks :heart:
-[[https://orgmode.org/][- Org mode for Emacs]]
-- [[https://github.com/RichardLitt/standard-readme.git][Standard ReadMe]]
+** Refs & Thanks
+- [[https://orgmode.org/][org mode for emacs]]
+- [[https://github.com/RichardLitt/standard-readme.git][standard readme]]
 
 ** License
 [[https://github.com/aylax/dothub.notes/blob/master/LICENSE][CC0-1.0]] © aylax
