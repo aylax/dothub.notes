@@ -1,2 +1,0 @@
-# dothub.notes
-dothub.notes
