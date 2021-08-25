@@ -1,4 +1,4 @@
-#+TITLE: aylax's dothub.notes
+#+TITLE: aylax's notes
 #+EMAIL: zhoubye@foxmail.com
 #+AUTHOR: aylax zhou
 #+LANGUAGE: en
