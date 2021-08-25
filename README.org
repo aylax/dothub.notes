@@ -1,20 +1,22 @@
-#+title: AyLax's notes
-#+author: aylax
-#+date: 2021-08-25
+#+TITLE: aylax's dothub.notes
+#+EMAIL: zhoubye@foxmail.com
+#+AUTHOR: aylax zhou
+#+LANGUAGE: en
+#+KEYWORDS: git readme orgmode emacs
 
 The notes used to record some of my thoughts and life.
 
-** Install
+** install
 #+begin_src sh
 git clone https://github.com/aylax/dothub.notes ~/aylax.notes
 #+end_src
 
-** Usage
+** usage
 The notes is available as org file which you can load in Emacs.
 
-** Refs & Thanks
+** refs & thanks
 - [[https://orgmode.org/][org mode for emacs]]
 - [[https://github.com/RichardLitt/standard-readme.git][standard readme]]
 
-** License
+** license
 [[https://github.com/aylax/dothub.notes/blob/master/LICENSE][CC0-1.0]] © aylax
