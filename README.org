@@ -1,8 +1,8 @@
-#+TITLE: aylax's notes
-#+EMAIL: zhoubye@foxmail.com
-#+AUTHOR: aylax zhou
-#+LANGUAGE: en
-#+KEYWORDS: git readme orgmode emacs
+#+title: aylax's notes
+#+email: zhoubye@foxmail.com
+#+author: aylax zhou
+#+language: en
+#+keywords: git readme orgmode emacs
 
 The notes used to record some of my thoughts and life.
 
