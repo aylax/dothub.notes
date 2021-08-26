@@ -5,5 +5,4 @@
 #+KEYWORDS: nix nixos package-manager
 #+OPTIONS: author:t creator:t timestamp:t email:t
 
-Nix is a purely functional package manager and NixOS is a package
-management system based on it.
+NixOS is a linux distribution based on the Nix package manager and build system.
