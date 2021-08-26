@@ -1,8 +1,10 @@
-#+title: aylax's notes
-#+email: zhoubye@foxmail.com
-#+author: aylax zhou
-#+language: en
-#+keywords: git readme orgmode emacs
+#+TITLE: aylax's notes
+#+AUTHOR: aylax zhou
+#+EMAIL: zhoubye@foxmail.com
+#+DESCRIPTION: A readme of notes
+#+KEYWORDS: git readme orgmode emacs
+#+OPTIONS: author:t creator:t timestamp:t email:t
+
 
 The notes used to record some of my thoughts and life.
 
@@ -19,4 +21,4 @@ The notes is available as org file which you can load in emacs.
 - [[https://orgmode.org/][org mode for emacs]]
 
 ** license
-[[https://github.com/aylax/dothub.notes/blob/master/LICENSE][CC0-1.0]] © aylax
+[[https://github.com/aylax/dothub.notes/blob/master/license][CC0-1.0]] © aylax
