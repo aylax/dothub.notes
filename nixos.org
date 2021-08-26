@@ -8,11 +8,11 @@
 /NixOS/ is a linux distribution based on the Nix package manager and build system.
 
 
-* Introduction of Nix Language
+** Introduction of Nix Language
 
 In Nix, everything is an expression, there are no statements.
 
-** Simple Values
+*** Simple Values
 - String :: Strings are enclosed in double quotes ~"~ or double single quotes ~''~.
   Then ~URI~ as defined in [[https://letf.org/rfc/rfc2396.txt][RFC-2396]] can be written without quotes.
   #+begin_src nix
@@ -60,7 +60,7 @@ In Nix, everything is an expression, there are no statements.
     }
   #+end_src
 
-** Construct
+*** Construct
 - Recursive Sets :: Recursive sets are just nornal sets, but the attributes
   can refer to each other. Recursive sets may introduce the danger of infinite
   recursion.
