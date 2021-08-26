@@ -169,7 +169,7 @@ In Nix, everything is an expression, there are no statements.
     let as = { x = "foo"; y = "bar"; };
     in with as; x + y
   #+end_src
-  evalutes to ~"foobar"~ since the ~with~ adds the ~x~ and ~y~ attributes of ~as~ to the lexical scope in
+  evalutes to ~foobar~ since the ~with~ adds the ~x~ and ~y~ attributes of ~as~ to the lexical scope in
   the expression ~x + y~. This common use of
   #+begin_src nix
     { pkgs, ...}:
