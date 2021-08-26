@@ -5,4 +5,167 @@
 #+KEYWORDS: nix nixos package-manager
 #+OPTIONS: author:t creator:t timestamp:t email:t
 
-NixOS is a linux distribution based on the Nix package manager and build system.
+/NixOS/ is a linux distribution based on the Nix package manager and build system.
+
+
+* Introduction of Nix Language
+
+In Nix, everything is an expression, there are no statements.
+
+** Simple Values
+- String :: Strings are enclosed in double quotes /"/ or double single quotes /''/.
+  Then /URI/ as defined in [[https://letf.org/rfc/rfc2396.txt][RFC-2396]] can be written without quotes.
+  #+begin_src nix
+    path =  "${RootPath}/home";
+    networking.HostName = "xxx";
+    networking.extraHosts = ''
+      127.0.0.2 other-localhost
+      10.0.0.1 server-host
+    '';
+    github = https://github.com;
+  #+end_src
+- Number :: Integer (like 123) or Float (like 3.14 or 0.27e8)
+  #+begin_src nix
+    age = 12;
+    cost = 12.98;
+  #+end_src
+- Lists :: A sequence of expressions delimited by /SPACE/.
+  #+begin_src nix
+    sample = [ 123 ./foo.nix "abc" (f { x = y; }) ];
+  #+end_src
+- Path :: A path must contain at least one /SLASH/.
+  #+begin_src nix
+    relativePath = ./foo.txt;
+    homeWithPath = ~/foo.txt;
+    absolutePath = /etc/passwd;
+  #+end_src
+- Attribute Sets :: An association between string keys and Nix Values.
+  #+begin_src nix
+    sets = { foo = "bar"; id = 12; attrs = [ 1 2 ]; };
+  #+end_src
+- Boolean :: Boolean Value can be /true/ or /false/.
+  #+begin_src nix
+    service.dwm.enable = true;
+  #+end_src
+
+** Construct
+- Recursive Sets :: Recursive sets are just nornal sets, but the attributes
+  can refer to each other. Recursive sets may introduce the danger of infinite
+  recursion.
+  #+begin_src nix
+    rec {
+      x = y;
+      y = 123;
+    }.x
+  #+end_src
+
+- Let Expression :: A let expression allows you to define local variables.
+  #+begin_src nix
+  let
+    x = "foo";
+    y = "bar";
+  in x + y
+  #+end_src
+
+- Inherit Attributes :: When define a set or in a let-expr it is often convenient
+  to copy variables from the surrounding lexical scope (e.g. when you want to propagate
+  attributes). This can be shortened using the /inherit/ keyword.
+  #+begin_src nix
+    let x = 123;
+    in
+    {
+      inherit x;
+      y = 456;
+    }
+  #+end_src
+  is equivalent to
+  #+begin_src nix
+    let x = 123;
+    in
+    {
+      x = x;
+      y = 456;
+    }
+  #+end_src
+  It is also possible to inherit attributes from another set. The fragment
+  #+begin_src
+    ...
+    inherit x y;
+    inherit (src-set) a b;
+    ...
+  #+end_src
+  is equivalent to
+  #+begin_src
+    ...
+    x = x; y = y;
+    a = src-set.a; b = src-set.b;
+    ...
+  #+end_src
+
+- Function :: with form /pattern: body/. The pattern specifies what the argument
+  of the function must look like, and binds variables in the body to (parts of)
+  the argument. There are three kinds of patterns.
+  - If a pattern is a single identifier, then the function matches any argument.
+    #+begin_src nix
+      let negate = x: !x;
+          concat = x: y: x + y;
+      in if negate true then concat "foo" "bar" else ""
+    #+end_src
+    Note that concat is a function that takes one argument and returns a function
+    that takes another argument (like ~Haskell~). It presents ~partial function~.
+    #+begin_src nix
+      map (concat "foo") [ "bar" "bla" "abc" ]
+    #+end_src
+  - A set pattern of the form /{ x, y, z }: body/ matches a set containing the listed
+    attributes, and binds the values of those attributes to variables in the func-
+    tion body.
+    #+begin_src nix
+      { x, y }: x + y # only be called with a set containing { x , y }
+      { x, y, ... }: x + y # allows extra attributes
+    #+end_src
+    It is possible to provide default values for attributes.
+    #+begin_src nix
+      { x, y ? "foo" }: x + y
+    #+end_src
+    This specifies a function that only requires an attribute named /x/, but optionally
+    accepts /y/.
+  - An @-pattern provides a means of referring to the whole value being matched.
+    #+begin_src nix
+      args@{ x, y, ... }: x + y + args.a
+    #+end_src
+    But can also be written as:
+    #+begin_src nix
+      { x, y, ... } @ args: x + y + args.a
+    #+end_src
+    Here /args/ is bound to the entire argument, which is futher matched against the pattern
+    /{x, y, ...}/. /@-pattern/ makes mainly sense with an ellipsis /(...)/ as you can assess attribute
+    names as /a/, using /args.a/, which was given as an additional attribute to the function.
+
+- Condition :: if statements.
+  #+begin_src nix
+    if cond then e1 else e2
+  #+end_src
+
+- Assertion :: This used to check that certain requirements on or between features and
+  dependencies hold.
+  #+begin_src nix
+    assert cond; e
+  #+end_src
+
+- With Expression :: /with e1; e2/ introduce the set e1 into the lexical scope of expression e2.
+  #+begin_src nix
+    let as = { x = "foo"; y = "bar"; };
+    in with as; x + y
+  #+end_src
+  evalutes to /"foobar"/ since the /with/ adds the /x/ and /y/ attributes of /as/ to the lexical scope in
+  the expression /x + y/. This common use of
+  #+begin_src nix
+    { pkgs, ...}:
+    {
+      home.packages = with pkgs; [
+        tree
+      ];
+    }
+  #+end_src
+
+- Comment :: Comment can be single-line with a /#/ character, or ~/* ... */~.
