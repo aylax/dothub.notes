@@ -1,0 +1,9 @@
+#+TITLE: Re:Zero - DEATH OR CODE - . NixOS
+#+AUTHOR: aylax zhou
+#+EMAIL: zhoubye@foxmail.com
+#+DESCRIPTION: A description of nixos
+#+KEYWORDS: nix nixos package-manager
+#+OPTIONS: author:t creator:t timestamp:t email:t
+
+Nix is a purely functional package manager and NixOS is a package
+management system based on it.
