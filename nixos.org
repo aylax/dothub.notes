@@ -13,7 +13,7 @@
 In Nix, everything is an expression, there are no statements.
 
 *** Simple Values
-- String :: Strings are enclosed in double quotes ~\"~ or double single quotes ~\'\'~.
+- String :: Strings are enclosed in double quotes or double single quotes.
   Then ~URI~ as defined in [[https://www.ietf.org/rfc/rfc2396.txt][RFC-2396]] can be written without quotes.
   #+begin_src nix
     {
