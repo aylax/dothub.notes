@@ -13,39 +13,51 @@
 In Nix, everything is an expression, there are no statements.
 
 ** Simple Values
-- String :: Strings are enclosed in double quotes /"/ or double single quotes /''/.
-  Then /URI/ as defined in [[https://letf.org/rfc/rfc2396.txt][RFC-2396]] can be written without quotes.
+- String :: Strings are enclosed in double quotes ~"~ or double single quotes ~''~.
+  Then ~URI~ as defined in [[https://letf.org/rfc/rfc2396.txt][RFC-2396]] can be written without quotes.
   #+begin_src nix
-    path =  "${RootPath}/home";
-    networking.HostName = "xxx";
-    networking.extraHosts = ''
-      127.0.0.2 other-localhost
-      10.0.0.1 server-host
-    '';
-    github = https://github.com;
+    {
+      path =  "${RootPath}/home";
+      networking.HostName = "xxx";
+      networking.extraHosts = ''
+        127.0.0.2 other-localhost
+        10.0.0.1 server-host
+      '';
+      github = https://github.com;
+    }
   #+end_src
 - Number :: Integer (like 123) or Float (like 3.14 or 0.27e8)
   #+begin_src nix
-    age = 12;
-    cost = 12.98;
+    {
+      age = 12;
+      cost = 12.98;
+    }
   #+end_src
-- Lists :: A sequence of expressions delimited by /SPACE/.
+- Lists :: A sequence of expressions delimited by ~SPACE~.
   #+begin_src nix
-    sample = [ 123 ./foo.nix "abc" (f { x = y; }) ];
+    {
+      sample = [ 123 ./foo.nix "abc" (f { x = y; }) ];
+    }
   #+end_src
-- Path :: A path must contain at least one /SLASH/.
+- Path :: A path must contain at least one ~SLASH~.
   #+begin_src nix
-    relativePath = ./foo.txt;
-    homeWithPath = ~/foo.txt;
-    absolutePath = /etc/passwd;
+    {
+      relativePath = ./foo.txt;
+      homeWithPath = ~/foo.txt;
+      absolutePath = /etc/passwd;
+    }
   #+end_src
 - Attribute Sets :: An association between string keys and Nix Values.
   #+begin_src nix
-    sets = { foo = "bar"; id = 12; attrs = [ 1 2 ]; };
+    {
+      sets = { foo = "bar"; id = 12; attrs = [ 1 2 ]; };
+    }
   #+end_src
-- Boolean :: Boolean Value can be /true/ or /false/.
+- Boolean :: Boolean Value can be ~true~ or ~false~.
   #+begin_src nix
-    service.dwm.enable = true;
+    {
+      service.dwm.enable = true;
+    }
   #+end_src
 
 ** Construct
@@ -102,7 +114,7 @@ In Nix, everything is an expression, there are no statements.
     ...
   #+end_src
 
-- Function :: with form /pattern: body/. The pattern specifies what the argument
+- Function :: with form ~pattern: body~. The pattern specifies what the argument
   of the function must look like, and binds variables in the body to (parts of)
   the argument. There are three kinds of patterns.
   - If a pattern is a single identifier, then the function matches any argument.
@@ -112,11 +124,11 @@ In Nix, everything is an expression, there are no statements.
       in if negate true then concat "foo" "bar" else ""
     #+end_src
     Note that concat is a function that takes one argument and returns a function
-    that takes another argument (like ~Haskell~). It presents ~partial function~.
+    that takes another argument (like ~haskell~). It presents ~partial function~.
     #+begin_src nix
       map (concat "foo") [ "bar" "bla" "abc" ]
     #+end_src
-  - A set pattern of the form /{ x, y, z }: body/ matches a set containing the listed
+  - A set pattern of the form ~{ x, y, z }: body~ matches a set containing the listed
     attributes, and binds the values of those attributes to variables in the func-
     tion body.
     #+begin_src nix
@@ -127,8 +139,8 @@ In Nix, everything is an expression, there are no statements.
     #+begin_src nix
       { x, y ? "foo" }: x + y
     #+end_src
-    This specifies a function that only requires an attribute named /x/, but optionally
-    accepts /y/.
+    This specifies a function that only requires an attribute named ~x~, but optionally
+    accepts ~y~.
   - An @-pattern provides a means of referring to the whole value being matched.
     #+begin_src nix
       args@{ x, y, ... }: x + y + args.a
@@ -137,9 +149,9 @@ In Nix, everything is an expression, there are no statements.
     #+begin_src nix
       { x, y, ... } @ args: x + y + args.a
     #+end_src
-    Here /args/ is bound to the entire argument, which is futher matched against the pattern
-    /{x, y, ...}/. /@-pattern/ makes mainly sense with an ellipsis /(...)/ as you can assess attribute
-    names as /a/, using /args.a/, which was given as an additional attribute to the function.
+    Here ~args~ is bound to the entire argument, which is futher matched against the pattern
+    ~{ x, y, ...}~. ~@-pattern~ makes mainly sense with an ellipsis ~(...)~ as you can assess attribute
+    names as ~a~, using ~args.a~, which was given as an additional attribute to the function.
 
 - Condition :: if statements.
   #+begin_src nix
@@ -152,13 +164,13 @@ In Nix, everything is an expression, there are no statements.
     assert cond; e
   #+end_src
 
-- With Expression :: /with e1; e2/ introduce the set e1 into the lexical scope of expression e2.
+- With Expression :: ~with e1; e2~ introduce the set ~e1~ into the lexical scope of expression ~e2~.
   #+begin_src nix
     let as = { x = "foo"; y = "bar"; };
     in with as; x + y
   #+end_src
-  evalutes to /"foobar"/ since the /with/ adds the /x/ and /y/ attributes of /as/ to the lexical scope in
-  the expression /x + y/. This common use of
+  evalutes to ~"foobar"~ since the ~with~ adds the ~x~ and ~y~ attributes of ~as~ to the lexical scope in
+  the expression ~x + y~. This common use of
   #+begin_src nix
     { pkgs, ...}:
     {
@@ -168,4 +180,4 @@ In Nix, everything is an expression, there are no statements.
     }
   #+end_src
 
-- Comment :: Comment can be single-line with a /#/ character, or ~/* ... */~.
+- Comment :: Comment can be single-line with a ~#~ character, or ~/* ... */~.
