@@ -1,0 +1,119 @@
+#+TITLE: Re:Zero - DEATH OR KISS - . Rust
+#+AUTHOR: aylax zhou
+#+EMAIL: zhoubye@foxmail.com
+#+DESCRIPTION: A description of rust
+#+KEYWORDS: rust
+#+OPTIONS: author:t creator:t timestamp:t email:t
+
+** Getting started
+:PROPERTIES:
+:CUSTOM_ID: GettingStarted
+:END:
+[2021-08-27 Fri 12:30]
+
+Let's start our rust journey!
+
+*** Installation
+:PROPERTIES:
+:CUSTOM_ID: Installation
+:END:
+[2021-08-27 Fri 12:30]
+
+=rustup= is a command line tool for managing =Rust= versions and associated tools.
+
+**** Install rustup on Linux or macOS
+We can install =rustup= use the command below.
+#+begin_src sh
+curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
+#+end_src
+
+**** Update and Uninstall
+we can update rustup use the command below.
+#+begin_src sh
+rustup update
+#+end_src
+
+To uninstall =Rust= and =rustup=, run the following script.
+#+begin_src sh
+rustup self uninstall
+#+end_src
+
+**** Local Documentation
+The installation of =Rust= also includes a copy of the documentation. So you can
+read it offline. Just type the command below.
+#+begin_src sh
+rustup doc
+#+end_src
+
+*** First Example
+:PROPERTIES:
+:CUSTOM_ID: FirstExample
+:END:
+[2021-08-27 Fri 12:42]
+
+After installed =Rust=, let's write a little program.
+
+**** Write and Run a Rust Program
+
+create a file named =main.rs=, and type something.
+#+begin_src rust
+fn main() {
+  println!("hello world!");
+}
+#+end_src
+
+and then compile it by =rustc=
+#+begin_src sh
+rustc main.rs
+#+end_src
+
+finally you can run the binary file.
+#+begin_src sh
+./main
+#+end_src
+
+*** Hello Cargo
+:PROPERTIES:
+:CUSTOM_ID: Hello Cargo
+:END:
+[2021-08-27 Fri 12:55]
+
+=Cargo= is Rust's build system and package manager.
+
+**** Create a project with Cargo
+Let's create a new project using cargo.
+#+begin_src sh
+cargo new first_example --bin
+cd first_example
+#+end_src
+
+It has also initialized as a git repository along with a gitignore file.
+Git files won't be generated if you run =cargo new= within an existed repo.
+You can override this behavior by using =cargo new --vcs=git=.
+#+begin_src
+Note: Git is a common version control system. you can change =cargo new= to
+use a different version control system or no version control system by using
+the =--vcs= flag. Run =cargo new --help= to see the available options.
+#+end_src
+
+**** Build and Run with Cargo.
+Now let's build our project.
+#+begin_src sh
+cargo build
+#+end_src
+
+This command creates an executable file in =./target/debug/=. You can run the
+executable with the command.
+#+begin_src sh
+cargo run
+#+end_src
+
+Cargo also provides a command called =cargo check=. This command quickly checks
+your code to make sure it compiles but doesn't produce an executable.
+
+**** Building for Release
+When our project is finally ready for release, we can use =cargo build --release=
+to compile it with optimizations. This command will create an executable in
+=./target/release/= instead of =./target/debug/=. The optimizations make our Rust code
+run faster, but turning them on lengthens the time it takes for our program to compile.
+
