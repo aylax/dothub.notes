@@ -229,3 +229,47 @@ let c = 'z';
 
 **** Compound Types
 Compound types can group multiple values into one type. Rust has two primitive compound types: =tuples= and =arrays=.
+
+*Tuple Type*
+
+A tuple is a general way of grouping together a numbers of values with a variety of types into one compound type.
+Tuples have a fixed length: once declared, they can not grow or shrink in size.
+#+begin_src rust
+fn main {
+  let tup: (i32, f64, u8) = (500, 6.4, 1);
+  let (x, y, z) = tup;
+  println!("tup.first is {}", tup.0);
+}
+#+end_src
+
+*Array Type*
+
+Another way to have a collection of multiple values is with an array. Unlike a tuple, every element of an
+array must have the same type. Arrays also have a fixed length, like tuples.
+#+begin_src rust
+fn main() {
+  let arr = [1, 2, 3];
+  let brr: [i32; 4] = [1, 2, 3, 4];
+  println!("arr[0] is {}", arr[0]);
+}
+#+end_src
+
+*** Functions
+Function definitions in Rust start with =fn= and have a set of parentheses after the function name.
+The curly brackets tell the compiler where the function body begins and ends.
+#+begin_src rust
+fn foo(a: i32) -> i32 {
+  a + 1
+}
+fn bar() {}
+fn foobar() -> ! {}
+#+end_src
+
+Function body is made up of a series of statements optionally ending in an expression. Statements are
+instructions that perform some action and do not return a value. Expressions evalute to a resulting value.
+#+begin_src rust
+fn main() {
+  let y = 6; // statement
+  y + 1 // expression
+}
+#+end_src
