@@ -116,3 +116,8 @@ When our project is finally ready for release, we can use =cargo build --release
 to compile it with optimizations. This command will create an executable in
 =./target/release/= instead of =./target/debug/=. The optimizations make our Rust code
 run faster, but turning them on lengthens the time it takes for our program to compile.
+
+**** Update a Crate to Get a New Version
+When you do want to update a crate, Cargo provides another command, =cargo update=. Which will
+igonre the =Cargo.lock= file and figure out all the latest versions that fit your specifications
+in Cargo.toml. If that works, Cargo will write those versions to the =Cargo.lock= file.
