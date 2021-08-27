@@ -9,7 +9,7 @@
 :PROPERTIES:
 :CUSTOM_ID: GettingStarted
 :END:
-[2021-08-27 Fri 12:30]
+<2021-08-27 Fri 12:30>
 
 Let's start our rust journey!
 
@@ -17,7 +17,7 @@ Let's start our rust journey!
 :PROPERTIES:
 :CUSTOM_ID: Installation
 :END:
-[2021-08-27 Fri 12:30]
+<2021-08-27 Fri 12:30>
 
 =rustup= is a command line tool for managing =Rust= versions and associated tools.
 
@@ -49,7 +49,7 @@ rustup doc
 :PROPERTIES:
 :CUSTOM_ID: FirstExample
 :END:
-[2021-08-27 Fri 12:42]
+<2021-08-27 Fri 12:42>
 
 After installed =Rust=, let's write a little program.
 
@@ -76,7 +76,7 @@ finally you can run the binary file.
 :PROPERTIES:
 :CUSTOM_ID: Hello Cargo
 :END:
-[2021-08-27 Fri 12:55]
+<2021-08-27 Fri 12:55>
 
 =Cargo= is Rust's build system and package manager.
 
@@ -116,4 +116,3 @@ When our project is finally ready for release, we can use =cargo build --release
 to compile it with optimizations. This command will create an executable in
 =./target/release/= instead of =./target/debug/=. The optimizations make our Rust code
 run faster, but turning them on lengthens the time it takes for our program to compile.
-

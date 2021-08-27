@@ -1,4 +1,4 @@
-#+TITLE: Re:Zero - DEATH OR CODE - . NixOS
+#+TITLE: Re:Zero - DEATH OR KISS - . NixOS
 #+AUTHOR: aylax zhou
 #+EMAIL: zhoubye@foxmail.com
 #+DESCRIPTION: A description of nixos
