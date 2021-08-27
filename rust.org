@@ -121,3 +121,122 @@ run faster, but turning them on lengthens the time it takes for our program to c
 When you do want to update a crate, Cargo provides another command, =cargo update=. Which will
 ignore the =Cargo.lock= file and figure out all the latest versions that fit versions in Cargo.toml.
 If that works, Cargo will write those versions to the =Cargo.lock= file.
+
+** Common Concepts
+:PROPERTIES:
+:CUSTOM_ID: CommonConcepts
+:END:
+<2021-08-27 Fri 16:12>
+This chapter covers concepts that appear in almost every programming language and how they work in Rust.
+Specifically, we'll learn about variables, basic types, functions, comments, and control flow.
+
+*** Variables and Mutability
+:PROPERTIES:
+:CUSTOM_ID: VariablesAndMutability
+:END:
+<2021-08-27 Fri 16:12>
+
+By default variables are immutable and we can use =let mut= to make variables mutable. When a variables
+immutable, once a value is bound to a name, we can't change that value. Here's error code below.
+#+begin_src rust
+fn main() {
+ let x = 5;
+ x = 6;
+ println!("The value of x is: {}", x);
+}
+#+end_src
+
+Save and run it using =cargo run=. You should receive an error message. The error message indicates that
+the cause of the error is that you =can not assign twice to immutable variable x=, because you tried to
+assign a second value to the immutable variable.
+
+**** Differences Between Variables and Constants
+Declare constants using the =const= keyword instead of =let=. The Constants type must be annotated. Constants
+can be declared in any scope, including the global scope. Constants may be set only to a constant expression,
+not the result of a function call or any other value that could only be computed at runtime.
+
+**** Shadowing
+You can declare a new variable with the same name as a previous variable. It means that the first variable is
+shadowed by the second.
+#+begin_src rust
+fn main {
+  let x = 5;
+  let x = 12;
+}
+#+end_src
+
+Shadowing is different from marking a variable as =mut=, because we'll get a compile-time error if we accidentally
+try to reassign to this variable without using the =let= keyword.
+
+The other difference between =mut= and shadowing is that because we're effectively creating a new variable when we
+use the =let= keyword again, we can change the type of the value but reuse the same name.
+
+*** Data Types
+:PROPETIES:
+:CUSTOM_ID: DataTypes
+:END:
+<2021-08-27 Fri 16:50>
+
+Every value in Rust is of a certain data type. which tells Rust what kind of data is being specified so it knows
+how to work with that data. We'll look at two data type subsets: =scalar= and =compound=.
+
+**** Scalar Types
+A scalar type represents a single value. Rust has four primary scalar types: integers, floating-point numbers,
+booleans, and characters.
+
+*Integer Types*
+An integer is a number without a fractional component.
+
+=Integer Types in Rust=
++------------+------------+------------+
+|   Length   |   Signed   |  Unsigned  |
++------------+------------+------------+
+|   8-bit    |     i8     |    u8      |
++------------+------------+------------+
+|   16-bit   |     i16    |    u16     |
++------------+------------+------------+
+|   32-bit   |     i32    |    u32     |
++------------+------------+------------+
+|   64-bit   |     i64    |    u64     |
++------------+------------+------------+
+|  128-bit   |    i128    |    u128    |
++------------+------------+------------+
+|    arch    |    isize   |    usize   |
++------------+------------+------------+
+
+=Integer Literals in Rust=
++------------+------------+
+|  Literals  |  Example   |
++------------+------------+
+|  Decimal   |   98_222   |
++------------+------------+
+|    Hex     |    0xff    |
++------------+------------+
+|   Octal    |    0o22    |
++------------+------------+
+|  Binary    |    0b11    |
++------------+------------+
+|  Byte(u8)  |    b'A'    |
++------------+------------+
+
+=Floating-Point Types=
+
+Rust also has two primitive types for floating-point numbers, which are numbers with dicimal points.
+Rust's floating-point types are =f32= and =f64=.
+
+=Boolean Type=
+
+A boolean type in rust has two possible values: =true= and =false=. Booleans are one byte in size.
+#+begin_src rust
+let is_true: bool = true;
+#+end_src
+
+=Character Type=
+
+char literals are specified with single quotes.
+#+begin_src rust
+let c = 'z';
+#+end_src
+
+**** Compound Types
+Compound types can group multiple values into one type. Rust has two primitive compound types: =tuples= and =arrays=.
