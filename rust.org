@@ -185,12 +185,12 @@ A scalar type represents a single value. Rust has four primary scalar types: int
 booleans, and characters.
 
 *Integer Types*
+
 An integer is a number without a fractional component.
 
-=Integer Types in Rust=
+_Integer Types in Rust_
 
 |   Length   |   Signed   |  Unsigned  |
-+------------+------------+------------+
 |   8-bit    |    i8      |    u8      |
 |   16-bit   |    i16     |    u16     |
 |   32-bit   |    i32     |    u32     |
@@ -198,29 +198,29 @@ An integer is a number without a fractional component.
 |   128-bit  |    i128    |    u128    |
 |   arch     |    isize   |    usize   |
 
-=Integer Literals in Rust=
+_Integer Literals in Rust_
 
 |  Literals  |  Example   |
-+------------+------------+
 |  Decimal   |    98_22   |
 |  Hex       |    0xff    |
 |  Octal     |    0o22    |
 |  Binary    |    0b11    |
 |  Byte(u8)  |    b'A'    |
 
-=Floating-Point Types=
+
+*Floating-Point Types*
 
 Rust also has two primitive types for floating-point numbers, which are numbers with dicimal points.
 Rust's floating-point types are =f32= and =f64=.
 
-=Boolean Type=
+*Boolean Type*
 
 A boolean type in rust has two possible values: =true= and =false=. Booleans are one byte in size.
 #+begin_src rust
 let is_true: bool = true;
 #+end_src
 
-=Character Type=
+*Character Type*
 
 char literals are specified with single quotes.
 #+begin_src rust
