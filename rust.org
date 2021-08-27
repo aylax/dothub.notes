@@ -188,6 +188,7 @@ booleans, and characters.
 An integer is a number without a fractional component.
 
 =Integer Types in Rust=
+
 +------------+------------+------------+
 |   Length   |   Signed   |  Unsigned  |
 +------------+------------+------------+
@@ -205,6 +206,7 @@ An integer is a number without a fractional component.
 +------------+------------+------------+
 
 =Integer Literals in Rust=
+
 +------------+------------+
 |  Literals  |  Example   |
 +------------+------------+
