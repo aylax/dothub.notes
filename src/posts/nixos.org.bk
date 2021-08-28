@@ -1,8 +1,9 @@
 #+TITLE: Re:Zero - DEATH OR KISS - . NixOS
+#+DATE: 2021-08-21
+#+KEYWORDS: nix
 #+AUTHOR: aylax zhou
 #+EMAIL: zhoubye@foxmail.com
 #+DESCRIPTION: A description of nixos
-#+KEYWORDS: nix nixos package-manager
 #+OPTIONS: author:t creator:t timestamp:t email:t
 
 /NixOS/ is a linux distribution based on the Nix package manager and build system.

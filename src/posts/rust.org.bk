@@ -1,15 +1,15 @@
 #+TITLE: Re:Zero - DEATH OR KISS - . Rust
+#+KEYWORDS: rust
+#+DATE: 2021-08-27
 #+AUTHOR: aylax zhou
 #+EMAIL: zhoubye@foxmail.com
 #+DESCRIPTION: A description of rust
-#+KEYWORDS: rust
 #+OPTIONS: author:t creator:t timestamp:t email:t
 
 ** Getting started
 :PROPERTIES:
 :CUSTOM_ID: GettingStarted
 :END:
-<2021-08-27 Fri 12:30>
 
 Let's start our rust journey!
 
@@ -17,7 +17,6 @@ Let's start our rust journey!
 :PROPERTIES:
 :CUSTOM_ID: Installation
 :END:
-<2021-08-27 Fri 12:30>
 
 =rustup= is a command line tool for managing =Rust= versions and associated tools.
 
@@ -49,7 +48,6 @@ rustup doc
 :PROPERTIES:
 :CUSTOM_ID: FirstExample
 :END:
-<2021-08-27 Fri 12:42>
 
 After installed =Rust=, let's write a little program.
 
@@ -76,7 +74,6 @@ finally you can run the binary file.
 :PROPERTIES:
 :CUSTOM_ID: Hello Cargo
 :END:
-<2021-08-27 Fri 12:55>
 
 =Cargo= is Rust's build system and package manager.
 
@@ -126,7 +123,7 @@ If that works, Cargo will write those versions to the =Cargo.lock= file.
 :PROPERTIES:
 :CUSTOM_ID: CommonConcepts
 :END:
-<2021-08-27 Fri 16:12>
+
 This chapter covers concepts that appear in almost every programming language and how they work in Rust.
 Specifically, we'll learn about variables, basic types, functions, comments, and control flow.
 
@@ -134,7 +131,6 @@ Specifically, we'll learn about variables, basic types, functions, comments, and
 :PROPERTIES:
 :CUSTOM_ID: VariablesAndMutability
 :END:
-<2021-08-27 Fri 16:12>
 
 By default variables are immutable and we can use =let mut= to make variables mutable. When a variables
 immutable, once a value is bound to a name, we can't change that value. Here's error code below.
@@ -175,7 +171,6 @@ use the =let= keyword again, we can change the type of the value but reuse the s
 :PROPETIES:
 :CUSTOM_ID: DataTypes
 :END:
-<2021-08-27 Fri 16:50>
 
 Every value in Rust is of a certain data type. which tells Rust what kind of data is being specified so it knows
 how to work with that data. We'll look at two data type subsets: =scalar= and =compound=.
