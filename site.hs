@@ -3,11 +3,10 @@
 import           Data.Monoid (mappend)
 import           Hakyll
 import           Data.List            (isSuffixOf, isPrefixOf)
-import           Data.Maybe           (fromMaybe)
 import qualified Text.Pandoc          as Pandoc
 import           Text.Pandoc.SideNote (usingSideNotes)
 import           Text.Pandoc.Walk     (walk)
-import           System.FilePath      (replaceExtension, takeBaseName, takeDirectory, (</>))
+import           System.FilePath      (takeBaseName, takeDirectory, (</>))
 
 ------------------------------    SITE.H    ------------------------------------
 main :: IO ()
@@ -39,10 +38,17 @@ main = hakyll $ do
             makeItem $ unlines $ map itemBody $ theme : asset
 
 ------------------------------    POSTS     ------------------------------------
+    match "src/pages/*.org" $ do
+        route $ niceRoute
+        compile $ pandocExtCompiler
+            >>= loadAndApplyTemplate "templates/default.html" dateCtx
+            >>= relativizeUrls
+
     match "src/posts/*.org" $ do
         route $ niceRoute
         compile $ pandocExtCompiler
-            >>= loadAndApplyTemplate "templates/default.html" datePostCtx
+            >>= saveSnapshot "content"
+            >>= loadAndApplyTemplate "templates/default.html" dateCtx
             >>= relativizeUrls
     
     create ["posts"] $ do
@@ -50,8 +56,8 @@ main = hakyll $ do
         compile $ do
             posts <- recentFirst =<< loadAll "src/posts/*"
             let ctx =
-                    listField "posts" datePostCtx (return posts) `mappend`
-                    constField "title" "Archives"                `mappend`
+                    listField "posts" dateCtx (return posts) `mappend`
+                    constField "title" "Archives"            `mappend`
                     baseCtx
             makeItem ""
                 >>= loadAndApplyTemplate "templates/archive.html" ctx
@@ -63,10 +69,10 @@ main = hakyll $ do
         route $ constRoute "index.html"
         compile $ do
             posts <- loadAll "src/posts/*"
+            shows <- take 5 <$> recentFirst posts
             let indexCtx =
-                    listField "posts" datePostCtx (return posts) `mappend`
+                    listField "posts" dateCtx (return shows) `mappend`
                     baseCtx
-
             getResourceBody
                 >>= applyAsTemplate indexCtx
                 >>= loadAndApplyTemplate "templates/default.html" indexCtx
@@ -78,8 +84,8 @@ main = hakyll $ do
     create ["atom.xml"] $ do
         route idRoute
         compile $ do
-            let ctx = datePostCtx `mappend` constField "description" "description"
-            posts <- fmap (take 10) . recentFirst =<< loadAll "src/posts/*"
+            let ctx = dateCtx `mappend` constField "description" "description"
+            posts <- take 10 <$> (recentFirst =<< loadAllSnapshots "src/posts/*" "content")
             renderAtom atom ctx posts
 
 ------------------------------     RSS      ------------------------------------
@@ -112,6 +118,9 @@ stripTags = functionField "stripTags" $ \args item -> case args of
 baseCtx :: Context String
 baseCtx = Main.stripTags `mappend` defaultContext
 
+dateCtx :: Context String
+dateCtx = dateField "date" "%B %e, %Y" `mappend` baseCtx
+
 cleanUrl :: String -> String
 cleanUrl url
     | idx `isSuffixOf` url = take (length url - length idx) url
@@ -121,20 +130,12 @@ cleanUrl url
 cleanIndexUrls :: Item String -> Compiler (Item String)
 cleanIndexUrls = return . fmap (withUrls cleanUrl)
 
-datePostCtx :: Context String
-datePostCtx = dateField "date" "%B %e, %Y" `mappend` baseCtx
-
-escapedTitle :: Context String
-escapedTitle = field "title" $ \i -> do
-  value <- getMetadataField (itemIdentifier i) "title"
-  return . escapeHtml $ fromMaybe "Post Title" value
-
 niceRoute :: Routes
 niceRoute = customRoute createIndexRoute
   where createIndexRoute ident = directory </> pageName </> "index.html"
           where p = toFilePath ident
-                directory = if "content" `isPrefixOf` dir
-                             then drop 8 dir -- 8 == (len "content/")
+                directory = if "src" `isPrefixOf` dir
+                             then drop 4 dir -- 4 == (len "src/")
                              else dir
                 dir = takeDirectory p
                 bn = takeBaseName p

@@ -1,0 +1,11 @@
+#+TITLE: Uses This
+
+* How about uses this
+Uses This is a collection of nerdy interviews asking people
+from all walks of life what they use to get the job done.
+
+** Hardware
+I use =Happy Hacking Keyword= as my keyboard.
+
+** Software
+I use =NixOS= as my workstation.
