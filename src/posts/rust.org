@@ -268,3 +268,71 @@ fn main() {
   y + 1 // expression
 }
 #+end_src
+
+*** Comments
+In Rust, the idiomatic comment style starts a comment with two slashes, and
+the comment continues until the end of the line. Comments can also be placed
+at the end of lines containing code.
+#+begin_src rust
+// main.rs
+fn main() {
+  let x = 3; // this is x;
+}
+#+end_src
+
+Also, rust has documentation comments which use three slashes instead of two and
+support markdown notation for formatting the text. Place documentation comments
+just before the item they're documenting.
+#+begin_src rust
+/// This is Documentation comment
+/// # Examples
+/// ```rust
+/// let a = 5;
+/// assert_eq!(a, a);
+///```
+
+pub fn add_one(x: i32) -> i32 {
+  x + 1
+}
+#+end_src
+
+For convenience, running =cargo doc --open= will build the HTML for your current
+crate's documentation and open the result in a web browser.
+
+*** Control Flow
+
+**** If Expression
+An if expression allows you to branch your code depending on conditions. If this
+condition is met, run this block of code, otherwise not run it.
+#+begin_src rust
+fn main() {
+  let number = 12;
+  let result = if number < 6 {
+    5 
+  } else if number > 8 {
+    6
+  } else {
+    9
+  };
+}
+#+end_src
+
+**** Repetition With Loops
+It's often useful to excute a block of code more than once. Rust has three kinds
+of loops: =loop=, =while=, and =for=.
+#+begin_src rust
+fn main() {
+  loop {
+    println!("again!");
+  }
+  
+  while true {
+    println!("always true!");
+  }
+
+  for element in [1, 2, 3].iter() {
+    println!("the value is: {}", element);
+  }
+}
+#+end_src
+
