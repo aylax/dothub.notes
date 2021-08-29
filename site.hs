@@ -12,12 +12,12 @@ import           System.FilePath      (takeBaseName, takeDirectory, (</>))
 main :: IO ()
 main = hakyll $ do
 ------------------------------    ASSETS    ------------------------------------
-    match "src/assets/images/*" $ do
-        route $ customRoute $ drop 11 . toFilePath
+    match "assets/images/*" $ do
+        route $ customRoute $ drop 7 . toFilePath
         compile copyFileCompiler
 
-    match "src/assets/css/*.css" $ do
-        route $ customRoute $ drop 11 . toFilePath
+    match "assets/css/*.css" $ do
+        route $ customRoute $ drop 7 . toFilePath
         compile compressCssCompiler
 
 ------------------------------    THEMES    ------------------------------------
@@ -34,7 +34,7 @@ main = hakyll $ do
         route idRoute
         compile $ do
             theme <- load "themes/tufte/tufte.css"
-            asset <- loadAll "src/assets/css/*.css"
+            asset <- loadAll "assets/css/*.css"
             makeItem $ unlines $ map itemBody $ theme : asset
 
 ------------------------------    POSTS     ------------------------------------

@@ -24,6 +24,7 @@ cabal.project.local~
 .ghc.environment.*
 
 ### Hakyll ###
+*.org.metadata
 .stack-work/
 _cache/
 _site/

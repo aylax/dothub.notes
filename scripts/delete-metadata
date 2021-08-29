@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+
+find -name "*.org.metadata" | while read path
+do
+    rm $path
+    echo "${path} [DELETE]"
+done

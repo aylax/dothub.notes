@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+
+find -name "*.org" | while read path
+do
+    grep "^#.*: " $path \
+    | sed 's@^#.*: @\L&@g' \
+    | sed 's@#+@@g' \
+    > ${path}.metadata
+    echo "${path}.metadata [CREATE]"
+done
+
