@@ -333,6 +333,41 @@ fn main() {
   for element in [1, 2, 3].iter() {
     println!("the value is: {}", element);
   }
+  
+  for num in (0..3).rev() {
+    println!("num is {}", num);
+  }
 }
 #+end_src
 
+** Rust Ownership
+Owner ship is Rust's most unique feature, and it enables Rust to make memory
+safety guarantees  with needing a garbage collector.
+
+Keeping tracking of what part of code are using what data on the heap, minimi-
+-zing the amount of duplicate data on the heap, and cleaning up unused data on
+the heap are all problems that ownership addresses.
+
+_Ownership Rules_
+
+- Each value in Rust has a variable that's called its owner.
+- There can only be one owner at a time.
+- When the owner goes out of scope, the value will be dropped.
+
+_Variable Scope_
+
+The variable =s= refers to a string literal, where the value of the string is
+hardcoded into the text of our program. The variable is valid from the point at
+which it's declared until the end of the current scope.
+#+begin_src rust
+fn main() { // s is not valid here, it's not yet declared
+  {
+    let s = "a"; // s is valid from this point forward
+    // do stuff with s
+  } // this scope is now over and s is no longer valid
+}
+#+end_src
+
+In other words, there are two important points in time here:
+- When =s= comes into scope, it is valid.
+- It remains valid until it goes out of scope.  
