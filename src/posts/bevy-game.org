@@ -1,0 +1,9 @@
+#+TITLE: Re:Zero - DEATH OR KISS - . Bevy Game
+#+KEYWORDS: bevy rust
+#+DATE: 2021-08-31
+#+AUTHOR: aylax zhou
+#+EMAIL: zhoubye@foxmail.com
+#+DESCRIPTION: A description of bevy
+#+OPTIONS: author:t creator:t timestamp:t email:t
+
+** Getting started

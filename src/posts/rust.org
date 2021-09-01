@@ -371,3 +371,69 @@ fn main() { // s is not valid here, it's not yet declared
 In other words, there are two important points in time here:
 - When =s= comes into scope, it is valid.
 - It remains valid until it goes out of scope.  
+
+_Stack Only Data: Copy_
+
+Any group of simple scalar values can implement Copy, and nothin that requires
+allocation or is soem form of resource can implement Copy. If implements Copy,
+it can not implement Drop.
+
+Here are some of the types that implement Copy:
+- All the integer types, such as =i32=.
+- The Boolean type, =bool=, with values =true= and =false=.
+- All the floating point types, such as =f64=.
+- The character type, =char=.
+- Tuples, if they only contain types that also implement =Copy=. For example,
+  =(i32, i32)= implements =Copy=, but =(i32, String)= does not.
+
+_Return Values and Scope_
+
+Return values can also transfer ownership.
+#+begin_src rust
+fn give_ownership() -> String {
+  String::from("hello")
+}
+fn main() {
+  let s = give_ownership();
+  println("The value of s is {}", s);
+}
+#+end_src
+
+*** References and Borrowing
+We use =&v= to create a reference that refers to the value of =v=. If we want to
+create a mutable reference, we use =&mut v=.
+#+begin_src rust
+fn main() {
+  let mut s = String::from("a");
+  let r1 = &mut s;
+}
+#+end_src
+
+_The Rules of Reference_
+
+- At any given time, you can have either one mutable reference or any number of
+  immutable references.
+- References must always be valid.
+
+
+*** The Slice Type
+Another data type that does not have ownership is the slice. Slices let you
+reference a contiguous sequence of elements in a collection rather than the
+whole collection.
+
+Here's the example of String Slices =&str=:
+#+begin_src rust
+let s = String:: from("hello world");
+let s1 = &s[..3]; // [0, 3)
+let s2 = &s[2..]; // [2, len)
+let s3 = &s[1..3]; // [1, 3)
+let s4 = &s[..]; // [0, len)
+#+end_src
+
+
+** Using Structs to Structure Related Data
+A struct, or structure, is a custom data type that lets you name  and package
+together multiple related values that make up a meaningful group.
+
+
+
