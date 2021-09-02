@@ -10,7 +10,7 @@ The notes used to record some of my thoughts and life.
 
 ** install
 #+begin_src sh
-  git clone https://github.com/aylax/dothub.notes ~/aylax.notes
+git clone https://github.com/aylax/dothub.notes
 #+end_src
 
 ** usage
@@ -18,7 +18,7 @@ The notes is available as org file which you can load in emacs.
 
 ** refs & thanks
 - [[https://github.com/RichardLitt/standard-readme.git][standard readme]]
-- [[https://orgmode.org/][org mode for emacs]]
+- [[https://orgmode.org/][org mode website]]
 
 ** license
-[[https://github.com/aylax/dothub.notes/blob/master/license][CC0-1.0]] © aylax
+CC0-1.0 © aylax

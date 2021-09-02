@@ -435,5 +435,64 @@ let s4 = &s[..]; // [0, len)
 A struct, or structure, is a custom data type that lets you name  and package
 together multiple related values that make up a meaningful group.
 
+*** Defining and Instantiating Structs
+Structs are similar to tuples. Like tuples, the pieces of a struct can be diff-
+-erent types. Unlike with tupples, you'll name each piece of data so it's clear
+what the values mean. As a result of these names, structs are more flexible than
+tuples: you don't have to rely on the order of the data to specify or access the
+values of an instance.
+#+begin_src rust
+struct Person; // empty struct
+
+Struct Color(i32, i32, i32); // tuple struct
+
+struct User {
+  name: String,
+  email: String,
+  age: u8,
+}
+
+fn main() {
+  let mut user1 = User {
+    name: String::from("z"),
+    email: String::from("xyz@example.com"),
+    age: 12,
+  };
+  user1.age = 13;
+}
+#+end_src
+
+We also can create instances from other instances with struct update syntax.
+#+begin_src rust
+let user2 = User {
+  name: String::from("q"),
+  ...user1
+};
+#+end_src
+
+
+_Unit-Like structs without and fields._
+
+Unit-like structs can be useful in situations in which you need to implement
+on some type but don't have any data that you want to store in the type itself.
+
+_Ownership of struct Data_
+
+In the =User= struct definition, we used the owned =String= type rather than the =&str=
+String slice type. This is a deliberate choice because we want instances of this
+struct to own all of this data and for that data to be valid for as long as the
+entire struct is valid.
+
+
+*** Method Syntax
+
+Methods are similar to functions: they're declared with the =fn= keyword and their
+name, they can have parameters and a return value, and they contain some code
+that is run when they're called from somewhere else.
+
+But, methods are different form functions in that they're defined within the con-
+-text of a struct(or of an enum or a triat object), and their first parameters is
+always =self=, which represents the instance of the struct the method is being
+called on.
 
 
